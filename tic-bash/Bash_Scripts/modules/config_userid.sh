@@ -3,7 +3,9 @@
 # This script run the terraform infrastructure for the microservices that are mentioned by the user from frontend
 # Make Sure to export aws credentials to be used as environment variables
 
-config_directory="${PWD}/../../Terraform_config"
+
+
+config_directory="../../Terraform_config"
 
 terraform_job1(){
     echo "Checking if Terraform is installed or not"
@@ -14,6 +16,7 @@ terraform_job1(){
         echo "No installation for terraform found, "\
              "Installing Now"
         echo "============================================================================================="
+        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
         curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
         sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update && sudo apt-get install terraform
@@ -28,10 +31,10 @@ terraform_job1(){
             terraform validate
             if [ "$?" -eq 0 ]
             then
-                terraform plan
+                terraform plan --var-file="var.tfvars.json"
                 if [ "$?" -eq 0 ]
                 then
-                    terraform apply --auto-approve
+                    terraform apply --auto-approve --var-file="var.tfvars.json"
                     echo "Your Instance will be accessible in a few seconds."
                 fi
             fi
@@ -45,10 +48,10 @@ terraform_job1(){
             terraform validate
             if [ "$?" -eq 0 ]
             then
-                terraform plan
+                terraform plan --var-file="var.tfvars.json"
                 if [ "$?" -eq 0 ]
                 then
-                    terraform apply --auto-approve
+                    terraform apply --auto-approve --var-file="var.tfvars.json"
                     echo "Your Instance will be accessible in a few seconds."
                 fi
             fi
