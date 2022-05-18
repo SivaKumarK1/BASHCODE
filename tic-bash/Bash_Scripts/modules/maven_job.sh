@@ -12,6 +12,7 @@ mvn_job(){
         if [ "$?" -eq 127 ]
         then
                 sudo apt install default-jdk -y
+                sudo apt-get update -y --fix-missing
                 sudo apt install maven -y
             if [ "$?" -eq 0 ]
             then 
