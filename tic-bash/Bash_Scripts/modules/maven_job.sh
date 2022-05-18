@@ -11,7 +11,9 @@ mvn_job(){
         java -version
         if [ "$?" -eq 127 ]
         then
-                sudo apt install default-jdk -y
+                sudo apt install default-jre -y
+                sudo apt-get update -y
+                sudo apt-get update --fix-missing -y
                 sudo apt install maven -y
             if [ "$?" -eq 0 ]
             then 
@@ -50,7 +52,7 @@ mvn_job(){
                 echo "Running Tests for your application"
                 echo "for now empty"
                 echo "============================================================================================="
-                cd $proj_dir
+                # cd $proj_dir
             done                     
     fi
 
