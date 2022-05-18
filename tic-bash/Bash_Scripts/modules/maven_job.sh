@@ -53,3 +53,4 @@ mvn_job(){
     # the above command is used to find the pom.xml file inside the services 
     
 }
+mvn_job
