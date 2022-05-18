@@ -1,6 +1,6 @@
 #!/bin/bash 
 # mvn installaton not working check in other instances
-proj_dir="../../../../MicroServiceRepo"
+proj_dir="${PWD}"
 
 mvn_job(){
     echo "Checking if Maven is installed or not"
@@ -12,8 +12,7 @@ mvn_job(){
         if [ "$?" -eq 127 ]
         then
                 sudo apt install default-jre -y
-                sudo apt-get update -y
-                sudo apt-get update --fix-missing -y
+                sudo apt update -y
                 sudo apt install maven -y
             if [ "$?" -eq 0 ]
             then 
@@ -31,7 +30,7 @@ mvn_job(){
                         echo "Running Tests for your application"
                         echo "for now empty"
                         echo "============================================================================================="
-                        # cd $proj_dir
+                        cd $proj_dir
                     done
             fi
         fi    
@@ -43,7 +42,7 @@ mvn_job(){
                 echo "Compiling with maven, inside $pomLocation"
                 echo "============================================================================================="
                 cd $pomLocation 
-                if [ -d $pomLocation ]
+                if [ -d "$pomLocation" ]
                 then
                     mvn clean install 
                 fi 
@@ -52,7 +51,7 @@ mvn_job(){
                 echo "Running Tests for your application"
                 echo "for now empty"
                 echo "============================================================================================="
-                # cd $proj_dir
+                cd $proj_dir
             done                     
     fi
 
