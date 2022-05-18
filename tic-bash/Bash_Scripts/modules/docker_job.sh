@@ -97,3 +97,4 @@ docker_job(){
         done
     fi
 }
+docker_job
