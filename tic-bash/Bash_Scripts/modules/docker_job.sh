@@ -4,6 +4,11 @@ dockerUsername=anil76201 # In production replace with ${dockerUsername} that is 
 dockerPassword=Reddy@0108 # In production replace with ${dockerPassword} that is coming from env file
 
 
+proj_dir="${PWD}"
+orgNamet=TIC_IMAGES # In production replace with ${orgName} that is coming from env file
+orgName=$(echo $orgNamet | tr '[:upper:]' '[:lower:]') 
+DATE=`date +%Y.%m.%d.%H.%M`
+
 docker_job(){
     echo "============================================================================================="
     echo "Building Docker Images for your MicroServices"
@@ -52,6 +57,7 @@ docker_job(){
                             echo "============================================================================================="
                             echo "No existing Image was Found, So building a new image"
                             echo "============================================================================================="
+                            echo "$orgName/$dockerImageName:$DATE"
                             sudo docker build -t $orgName/$dockerImageName:$DATE $dockerFileLoc
                             sudo docker push $orgName/$dockerImageName:$DATE
                         fi
@@ -69,7 +75,7 @@ docker_job(){
         echo "============================================================================================="
         for dockerFileLoc in `find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null`
         do
-            sudo docker --version
+            docker --version
             if [ "$?" -eq 0 ]
             then
             echo "============================================================================================="
@@ -79,7 +85,7 @@ docker_job(){
                 if [ -d "$dockerFileLoc" ]
                 then
                     dockerImageName=`echo $dockerFileLoc | grep -o '.\{1\}$'`
-                    if [[ -n `sudo docker images -q $orgName/$dockerImageName:$DATE` ]]
+                    if [[ -n `docker images -q $orgName/$dockerImageName:$DATE` ]]
                     then
                         echo "============================================================================================="
                         echo "Image Already Found, Removing it"
@@ -89,6 +95,7 @@ docker_job(){
                         echo "============================================================================================="
                         echo "No existing Image was Found, So building a new image"
                         echo "============================================================================================="
+                        echo "$orgName/$dockerImageName:$DATE"
                         sudo docker build -t $orgName/$dockerImageName:$DATE $dockerFileLoc
                         sudo docker push $orgName/$dockerImageName:$DATE
                     fi
@@ -96,5 +103,21 @@ docker_job(){
             fi
         done
     fi
+
+
+#     curl -X 'POST' \
+#   'http://localhost:8082/tic/api/v1/pipeline/status/1/1/1' \
+#   -H 'accept: */*' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#   "pipelineName": "pipeline", 
+#   "build": "true",
+#   "test": "true",
+#   "publish": "true",
+#   "infraStage": "null",
+#   "configStage": "null",
+#   "deploy": "null"
+# }'
 }
+#change tenantname, username, infraid after demo for now keep 1 1 1 
 docker_job
