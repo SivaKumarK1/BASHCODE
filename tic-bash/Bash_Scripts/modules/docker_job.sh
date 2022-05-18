@@ -9,7 +9,7 @@ docker_job(){
     echo "Building Docker Images for your MicroServices"
     echo "============================================================================================="
     echo "Checking if docker is installed or not"
-    docker --version
+    sudo docker --version
     if [ "$?" -eq 127 ]
     then
         echo "============================================================================================="
@@ -31,7 +31,7 @@ docker_job(){
             echo "Building Docker Images"
             for dockerFileLoc in `find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null`
             do
-                docker --version
+                sudo docker --version
                 if [ "$?" -eq 0 ]
                 then
                 echo "============================================================================================="
@@ -41,7 +41,7 @@ docker_job(){
                     if [ -d "$dockerFileLoc" ]
                     then
                         dockerImageName=`echo $dockerFileLoc | grep -o '.\{1\}$'`
-                        if [[ -n `docker images -q $orgName/$dockerImageName:$DATE` ]]
+                        if [[ -n `sudo docker images -q $orgName/$dockerImageName:$DATE` ]]
                         then
                             echo "============================================================================================="
                             echo "Image Already Found, Removing it"
@@ -69,7 +69,7 @@ docker_job(){
         echo "============================================================================================="
         for dockerFileLoc in `find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null`
         do
-            docker --version
+            sudo docker --version
             if [ "$?" -eq 0 ]
             then
             echo "============================================================================================="
@@ -79,7 +79,7 @@ docker_job(){
                 if [ -d "$dockerFileLoc" ]
                 then
                     dockerImageName=`echo $dockerFileLoc | grep -o '.\{1\}$'`
-                    if [[ -n `docker images -q $orgName/$dockerImageName:$DATE` ]]
+                    if [[ -n `sudo docker images -q $orgName/$dockerImageName:$DATE` ]]
                     then
                         echo "============================================================================================="
                         echo "Image Already Found, Removing it"
