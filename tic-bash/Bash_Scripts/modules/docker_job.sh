@@ -37,7 +37,7 @@ docker_job(){
             # find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null | grep -o '.\{1\}$'
             if [ -d "$dockerFileLoc" ]
             then
-                dockerImageName=`echo $dockerFileLoc | cut -d "/" -f 2`
+                dockerImageName=`echo $dockerFileLoc | cut -d "/" -f 3`
                 if [[ -n `sudo docker images -q $dockerUsername/$dockerImageName` ]] #:$DATE
                 then
                     echo "============================================================================================="
@@ -57,19 +57,20 @@ docker_job(){
         done
 
 
-#     curl -X 'POST' \
-#   'http://localhost:8082/tic/api/v1/pipeline/status/1/1/1' \
-#   -H 'accept: */*' \
-#   -H 'Content-Type: application/json' \
-#   -d '{
-#   "pipelineName": "pipeline", 
-#   "build": "true",
-#   "test": "true",
-#   "publish": "true",
-#   "infraStage": "null",
-#   "configStage": "null",
-#   "deploy": "null"
-# }'
+curl -X 'PATCH' \
+  'http://localhost:8082/tic/api/v1/pipeline/status/user/1/1' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "pipelineName": "pipeline",
+  "build": "true",
+  "test": "true",
+  "publish": "true",
+  "infraStage": "false",
+  "configStage": "false",
+  "deploy": "false"
+}'
+
 }
 #change tenantname, username, infraid after demo for now keep 1 1 1 
 docker_job

@@ -5,7 +5,7 @@
 
 
 
-config_directory="~/BASHCODE/Terraform_config"
+# config_directory="~/BASHCODE/Terraform_config"
 # config_directory=${PWD}
 # install terraform
 echo "########################################"
@@ -19,7 +19,7 @@ echo "terraform installed"
 
 terraform_job1(){
     echo "============================================================================================="
-    cd $config_directory
+    # cd $config_directory
     terraform init
     if [ "$?" -eq 0 ]
     then
