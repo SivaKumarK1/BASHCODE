@@ -35,19 +35,19 @@ mvn_job(){
             cd $proj_dir
         done                     
 
-  curl -X 'POST' \
-  'http://localhost:8082/tic/api/v1/pipeline/status/1/1/1' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "pipelineName": "pipeline", 
-  "build": "true",
-  "test": "true",
-  "publish": "null",
-  "infraStage": "null",
-  "configStage": "null",
-  "deploy": "null"
-}'
+#   curl -X 'POST' \
+#   'http://localhost:8082/tic/api/v1/pipeline/status/1/1/1' \
+#   -H 'accept: */*' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#   "pipelineName": "pipeline", 
+#   "build": "true",
+#   "test": "true",
+#   "publish": "null",
+#   "infraStage": "null",
+#   "configStage": "null",
+#   "deploy": "null"
+# }'
 
 #accodring to us pipeline name is nekku voche ci env file lo projectname_pipeline and userid too
     # find ./* -name 'pom.xml' -type f -printf "%h\n" 2>/dev/null
