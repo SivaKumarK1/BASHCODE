@@ -5,7 +5,7 @@
 
 
 
-config_directory="/home/ubuntu/BASHCODE/Terraform_config"
+config_directory="/home/ubuntu/BASHCODE/tic-bash/Terraform_config"
 # config_directory=${PWD}
 # install terraform
 echo "########################################"
