@@ -37,7 +37,7 @@ docker_job(){
             # find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null | grep -o '.\{1\}$'
             if [ -d "$dockerFileLoc" ]
             then
-                dockerImageName=`echo $dockerFileLoc | grep -o './{1\}$'`
+                dockerImageName=`echo $dockerFileLoc | cut -d "/" -f 2`
                 if [[ -n `sudo docker images -q $dockerUsername/$dockerImageName` ]] #:$DATE
                 then
                     echo "============================================================================================="
