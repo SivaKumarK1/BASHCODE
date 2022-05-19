@@ -5,8 +5,17 @@
 
 
 
-# config_directory="~/BASHCODE/Terraform_config"
-config_directory=${PWD}
+config_directory="~/BASHCODE/Terraform_config"
+# config_directory=${PWD}
+# install terraform
+echo "########################################"
+echo "########################################"
+echo "#################### install terrafrm-cli #########################"
+sudo apt-get update -y && sudo apt-get install -y gnupg software-properties-common curl
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update -y && sudo apt-get install terraform -y
+echo "terraform installed"
 
 terraform_job1(){
     echo "============================================================================================="

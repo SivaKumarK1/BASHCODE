@@ -4,6 +4,15 @@
 # proj_dir="~/MicroServiceRepo"
 proj_dir=${PWD}
 
+# install maven
+echo "########################################"
+echo "########################################"
+echo "#################### install maven #########################"
+sudo apt update -y
+sudo apt install default-jre -y
+sudo apt install maven -y
+echo "Maven installed"
+
 mvn_job(){
     echo "Checking if Maven is installed or not"
     mvn -v
