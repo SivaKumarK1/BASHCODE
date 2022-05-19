@@ -1,14 +1,14 @@
 #!/bin/bash 
 # docker login -u "anil76201" -p "Reddy@0108"
-dockerUsername=anil76201 # In production replace with ${dockerUsername} that is coming from env file
-dockerPassword=Reddy@0108 # In production replace with ${dockerPassword} that is coming from env file
+dockerUsername="anil76201" # In production replace with ${dockerUsername} that is coming from env file
+dockerPassword="Reddy@0108" # In production replace with ${dockerPassword} that is coming from env file
 
 
 # proj_dir="~/MicroServiceRepo"
 proj_dir=${PWD}
-orgNamet=TIC_IMAGES # In production replace with ${orgName} that is coming from env file
-orgName=$(echo $orgNamet | tr '[:upper:]' '[:lower:]') 
-DATE=`date +%Y.%m.%d.%H.%M`
+# orgNamet=TIC_IMAGES # In production replace with ${orgName} that is coming from env file
+# orgName=$(echo $orgNamet | tr '[:upper:]' '[:lower:]') 
+# DATE=`date +%Y.%m.%d.%H.%M`
 
 # install docker-engine
 sudo apt-get update -y
@@ -27,7 +27,7 @@ docker_job(){
     echo "============================================================================================="
     for dockerFileLoc in `find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null`
     do
-        sudo docker login -u "anil76201" -p "Reddy@0108"
+        sudo docker login -u $dockerUsername -p $dockerPassword
         sudo docker --version
         if [ "$?" -eq 0 ]
         then
@@ -37,20 +37,20 @@ docker_job(){
             # find ./* -name 'Dockerfile' -type f -printf "%h\n" 2>/dev/null | grep -o '.\{1\}$'
             if [ -d "$dockerFileLoc" ]
             then
-                dockerImageName=`echo $dockerFileLoc | grep -o '.\{1\}$'`
-                if [[ -n `sudo docker images -q $orgName/$dockerImageName:$DATE` ]]
+                dockerImageName=`echo $dockerFileLoc | grep -o './{1\}$'`
+                if [[ -n `sudo docker images -q $dockerUsername/$dockerImageName` ]] #:$DATE
                 then
                     echo "============================================================================================="
                     echo "Image Already Found, Removing it"
                     echo "============================================================================================="
-                    sudo docker rmi -f $orgName/$dockerImageName:$DATE
+                    sudo docker rmi -f $dockerUsername/$dockerImageName #:$DATE
                 else
                     echo "============================================================================================="
                     echo "No existing Image was Found, So building a new image"
                     echo "============================================================================================="
-                    echo "$orgName/$dockerImageName:$DATE"
-                    sudo docker build -t $orgName/$dockerImageName:$DATE $dockerFileLoc
-                    sudo docker push $orgName/$dockerImageName:$DATE
+                    echo "$dockerUsername/$dockerImageName"
+                    sudo docker build -t $dockerUsername/$dockerImageName $dockerFileLoc #:$DATE
+                    sudo docker push $dockerUsername/$dockerImageName  #:$DATE
                     fi
                 fi
             fi
