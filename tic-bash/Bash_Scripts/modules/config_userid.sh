@@ -5,55 +5,23 @@
 
 
 
-config_directory="../../Terraform_config"
+# config_directory="~/BASHCODE/Terraform_config"
+config_directory=${PWD}
 
 terraform_job1(){
-    echo "Checking if Terraform is installed or not"
-    terraform -version
-    if [ "$?" -eq 127 ]
+    echo "============================================================================================="
+    cd $config_directory
+    terraform init
+    if [ "$?" -eq 0 ]
     then
-        echo "============================================================================================="
-        echo "No installation for terraform found, "\
-             "Installing Now"
-        echo "============================================================================================="
-        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
-        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        sudo apt-get update && sudo apt-get install terraform
-        echo "============================================================================================="
-        echo "Terraform Installed"\
-             "Continuing with running terraform scripts"
-        echo "============================================================================================="
-        cd $config_directory
-        terraform init
+        terraform validate
         if [ "$?" -eq 0 ]
         then
-            terraform validate
+            terraform plan --var-file="var.tfvars.json"
             if [ "$?" -eq 0 ]
             then
-                terraform plan --var-file="var.tfvars.json"
-                if [ "$?" -eq 0 ]
-                then
-                    terraform apply --auto-approve --var-file="var.tfvars.json"
-                    echo "Your Instance will be accessible in a few seconds."
-                fi
-            fi
-        fi
-    else
-        echo "Installation was found !"
-        cd $config_directory
-        terraform init
-        if [ "$?" -eq 0 ]
-        then
-            terraform validate
-            if [ "$?" -eq 0 ]
-            then
-                terraform plan --var-file="var.tfvars.json"
-                if [ "$?" -eq 0 ]
-                then
-                    terraform apply --auto-approve --var-file="var.tfvars.json"
-                    echo "Your Instance will be accessible in a few seconds."
-                fi
+                terraform apply --auto-approve --var-file="var.tfvars.json"
+                echo "Your Instance will be accessible in a few seconds."
             fi
         fi
     fi
