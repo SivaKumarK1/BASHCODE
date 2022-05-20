@@ -27,18 +27,18 @@ variable "instance_type" {
 
 variable "key_path" {
   description = "SSH Public Key path"
-  default = "./TIC_terraform_key.pem"
+  default = "./TIC_Terraform_Key.pem"
 }
 
 variable "key_name" {
   description = "Desired name of Keypair..."
-  default = "TIC_terraform_key"
+  default = "TIC_Terraform_Key"
 }
 
 variable "public_key" {
-  default = "TIC_terraform_key.pub"
+  default = "TIC_Terraform_Key.pub"
 }
 
 variable "private_key" {
-  default = "TIC_terraform_key.pem"
+  default = "TIC_Terraform_Key.pem"
 }
