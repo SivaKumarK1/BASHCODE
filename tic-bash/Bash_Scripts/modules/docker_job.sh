@@ -57,19 +57,19 @@ docker_job(){
         done
 
 
-curl -X 'PATCH' \
-  'http://localhost:8082/tic/api/v1/pipeline/status/user/1/1' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "pipelineName": "pipeline",
-  "build": "true",
-  "test": "true",
-  "publish": "true",
-  "infraStage": "false",
-  "configStage": "false",
-  "deploy": "false"
-}'
+# curl -X 'PATCH' \
+#   'http://localhost:8082/tic/api/v1/pipeline/status/user/1/1' \
+#   -H 'accept: */*' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#   "pipelineName": "pipeline",
+#   "build": "true",
+#   "test": "true",
+#   "publish": "true",
+#   "infraStage": "false",
+#   "configStage": "false",
+#   "deploy": "false"
+# }'
 
 }
 #change tenantname, username, infraid after demo for now keep 1 1 1 
