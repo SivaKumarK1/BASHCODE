@@ -134,7 +134,7 @@ resource "null_resource" "postgres_install" {
 	  echo "[postgresql]" | tee -a postgres.ini;
 	  echo "${aws_instance.Postgres_instance.public_ip} ansible_ssh_private_key_file=${var.key_path}" | tee -a postgres.ini;
     export ANSIBLE_HOST_KEY_CHECKING=False;
-	  ansible-playbook --private-key ${var.key_path} -i postgres.ini ../ansible/install_postgres.yaml
+	  ansible-playbook --private-key ${var.key_path} -i postgres.ini ./install_postgres.yaml
     EOT
   }
 }
@@ -149,7 +149,7 @@ resource "null_resource" "docker_swarm" {
     echo "[workers]" | tee -a docker_swarm.ini;
 	  echo "${aws_instance.Worker_01.public_ip} ansible_ssh_private_key_file=${var.key_path}" | tee -a docker_swarm.ini;
     export ANSIBLE_HOST_KEY_CHECKING=False;
-	  ansible-playbook --private-key ${var.key_path} -i docker_swarm.ini ../ansible/docker_swarm.yaml
+	  ansible-playbook --private-key ${var.key_path} -i docker_swarm.ini ./docker_swarm.yaml
     EOT
   }
 }
