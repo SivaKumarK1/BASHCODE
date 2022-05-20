@@ -49,7 +49,7 @@ resource "aws_instance" "Postgres_instance" {
 }
 
 resource "aws_security_group" "infra-sg" {
-  name        = "TIC_Project_sec_grp1"
+  name        = "TIC_Project_sec_grp"
   description = "Security_Group"
   ingress {
     from_port   = 22
