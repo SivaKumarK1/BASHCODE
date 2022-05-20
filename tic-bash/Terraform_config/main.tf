@@ -9,7 +9,7 @@ resource "aws_instance" "Manager" {
   ami             = var.ami
   instance_type   = var.instance_type
   key_name = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.infra-sg-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.infra-sg.id}"]
   user_data = "${file("${var.bootstrap_path}")}"
   tags = {
     Name = "TIC_Manager_Docker_Swarm"
@@ -31,7 +31,7 @@ resource "aws_instance" "Worker_01" {
   ami             = var.ami
   instance_type   = var.instance_type
   key_name = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.infra-sg-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.infra-sg.id}"]
   user_data = "${file("${var.bootstrap_path}")}"
   tags = {
     Name = "TIC_Worker01_Docker_Swarm"
