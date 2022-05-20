@@ -42,14 +42,14 @@ resource "aws_instance" "Postgres_instance" {
   ami             = var.ami
   instance_type   = var.instance_type
   key_name = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.practise-server-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.infra-sg.id}"]
   tags = {
     Name = "TIC_Postgres_instance"
   }
 }
 
-resource "aws_security_group" "practise-server-sg" {
-  name        = "TIC_Project_sec_grp"
+resource "aws_security_group" "infra-sg" {
+  name        = "TIC_Project_sec_grp1"
   description = "Security_Group"
   ingress {
     from_port   = 22
