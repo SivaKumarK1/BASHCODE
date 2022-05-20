@@ -17,6 +17,15 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update -y && sudo apt-get install terraform -y
 echo "terraform installed"
 
+#install ansible
+echo "########################################"
+echo "########################################"
+echo "#################### install ansible #########################"
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update -y
+sudo apt install ansible -y
+echo "Ansible Installed"
+
 terraform_job1(){
     echo "============================================================================================="
     cd $config_directory
