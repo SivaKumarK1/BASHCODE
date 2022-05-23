@@ -8,8 +8,9 @@ proj_dir=${PWD}
 echo "########################################"
 echo "########################################"
 echo "#################### install maven #########################"
-sudo apt update -y
+# sudo apt update -y
 sudo apt install ca-certificates-java java-common liblcms2-2 libjpeg8 libfontconfig1 libharfbuzz0b libpcsclite1 -y
+sudo apt update --fix-missing -y
 sudo apt install openjdk-11-jre-headless -y
 sudo apt install maven -y
 echo "Maven installed"
