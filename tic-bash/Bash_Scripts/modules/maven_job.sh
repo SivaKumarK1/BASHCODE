@@ -9,7 +9,7 @@ echo "########################################"
 echo "########################################"
 echo "#################### install maven #########################"
 sudo apt update -y
-sudo apt install openjdk-11-jre -y
+sudo apt install openjdk-11-jre-headless -y
 sudo apt install maven -y
 echo "Maven installed"
 
